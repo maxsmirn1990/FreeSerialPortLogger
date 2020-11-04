@@ -2,6 +2,7 @@ import QtQuick 2.9
 import QtQuick.Window 2.2
 
 Window {
+    id: window
     width: 640
     height: 480
     visible: true
@@ -12,22 +13,31 @@ Window {
         anchors.fill: parent
         antialiasing: true
         topPadding: 2
-        spacing: 1
         rows: 2
         columns: 1
+        verticalItemAlignment: Grid.AlignTop
 
     Row{
         id:topPanel
         height: parent.height/4
         width: parent.width
-        anchors.top: parent.top
-
+        Rectangle{
+            color: "#434141"
+            anchors.fill: topPanel
+        }
         }
 
 
     Row{
         id:view
-        anchors.top: topPanel.bottom
+        width: parent.width
+        height: 500
+        anchors.bottom: window.bottom
+        Rectangle{
+            color: "#434141"
+            border.color: "#0f0f0f"
+            anchors.fill: view
+        }
     }
 
     }

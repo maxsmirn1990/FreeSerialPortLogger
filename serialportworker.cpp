@@ -6,7 +6,7 @@
 SerialPortWorker::SerialPortWorker(QObject *parent) : QObject(parent)
 {
     m_serialPortList = QSerialPortInfo::availablePorts();
-    m_serialPortName = m_serialPortList[0].portName();
+    m_serialPortName = m_serialPortList.at(0).portName();
 
     //DEBUG
     qDebug() << QString("Прошла инициализация");
