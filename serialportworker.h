@@ -10,7 +10,7 @@ class SerialPortWorker : public QObject
     Q_OBJECT
 public:
     explicit SerialPortWorker(QObject *parent = nullptr);
-    QList<QString> getListSerialPortName();
+   static QList<QString> getListSerialPortName();
 
 
 signals:

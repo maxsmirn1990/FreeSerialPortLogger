@@ -1,5 +1,6 @@
 import QtQuick.Controls 2.12
 import QtQuick 2.9
+import SerialNameList 1.0
 
 
     Rectangle{
@@ -22,14 +23,18 @@ import QtQuick 2.9
             topPadding: 5
             leftPadding: 5
 
-            ComboBox{
+           ComboBox{
                 id:serialBox
-
+                textRole: "display"
                 rightPadding: 5
                 anchors.topMargin: 5
                 width: root.width-10
                 height: root.height/3
-                displayText: "Нажмите кнопку обновить"
+                model: SerialNameList_qml{
+
+                       }
+                displayText: display
+
 
             }
         }
@@ -51,8 +56,9 @@ import QtQuick 2.9
                 width: parent.width-10
                 id:refbutton
                 text: "Обновить"
-
-
+               onClicked: {
+                   serialBox.model.refresh()
+               }
 
             }
 
