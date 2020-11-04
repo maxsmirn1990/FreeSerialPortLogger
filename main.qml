@@ -1,6 +1,7 @@
 import QtQuick 2.9
 import QtQuick.Window 2.2
 
+
 Window {
     id: window
     width: 640
@@ -19,19 +20,24 @@ Window {
 
     Row{
         id:topPanel
-        height: parent.height/4
+        height: parent.height/5
         width: parent.width
-        Rectangle{
-            color: "#434141"
-            anchors.fill: topPanel
-        }
+
+
+            ButtonPanel{
+                id:panel
+                height: parent.height
+                width: parent.width
+               }
+
+
         }
 
 
     Row{
         id:view
         width: parent.width
-        height: 500
+        height: parent.height*4/5
         anchors.bottom: window.bottom
         Rectangle{
             color: "#434141"
