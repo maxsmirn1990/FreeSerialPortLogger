@@ -35,12 +35,6 @@ import SerialNameList 1.0
                 model: SerialNameList_qml{
 
                        }
-//                model: ListModel {
-//                         id: model
-//                         ListElement { displayText: "Banana" }
-//                         ListElement { displayText: "Apple" }
-//                         ListElement { displayText: "Coconut" }
-//                }
 
                 displayText: display
 

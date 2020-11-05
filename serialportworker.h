@@ -16,10 +16,6 @@ public:
 signals:
 
 
-private:
-    QString m_serialPortName;
-    QList<QSerialPortInfo> m_serialPortList;
-
 };
 
 #endif // SERIALPORTWORKER_H

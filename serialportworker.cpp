@@ -5,19 +5,7 @@
 
 SerialPortWorker::SerialPortWorker(QObject *parent) : QObject(parent)
 {
-    m_serialPortList = QSerialPortInfo::availablePorts();
-    m_serialPortName = m_serialPortList.at(0).portName();
 
-    //DEBUG
-    qDebug() << QString("Прошла инициализация");
-    qDebug() << QString("Список СОМ портов:");
-    for(int i=0;i<m_serialPortList.size();i++){
-    qDebug() << m_serialPortList.at(i).portName() \
-                + QString("  ") \
-                + m_serialPortList.at(i).description();
-    }
-    qDebug() << QString("Имя выбранного СОМ порта ") \
-                + m_serialPortName;
 }
 
 QList<QString> SerialPortWorker::getListSerialPortName()
@@ -43,5 +31,10 @@ QList<QString> SerialPortWorker::getListSerialPortName()
    }
 
     return tempList;
+
+
 }
+
+
+
 
