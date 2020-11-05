@@ -4,11 +4,11 @@
 
 
 
-SerialPortListModel::SerialPortListModel(QObject *parent)
+SerialPortListModel::SerialPortListModel(QObject *parent, SerialPortWorker* portWorker)
     : QAbstractListModel(parent)
 {
-
-
+   portWorker = new SerialPortWorker();
+   m_portWorker=portWorker;
    m_list.clear();
    m_list.append(QString("Нажмите кнопку обновить"));
    m_rowCount = m_list.size();
@@ -39,7 +39,7 @@ QVariant SerialPortListModel::data(const QModelIndex &index, int role) const
 void SerialPortListModel::refresh()
 {
    m_list.clear();
-   m_list = SerialPortWorker::getListSerialPortName();
+   m_list = m_portWorker->getListSerialPortName();
    m_rowCount = m_list.size();
    emit dataChanged(createIndex(0,0), createIndex(m_list.size(),0));
 

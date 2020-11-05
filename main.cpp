@@ -15,9 +15,11 @@ int main(int argc, char *argv[])
 
     QQmlApplicationEngine engine;
 
-    SerialPortWorker portWorker;
-    SerialPortListModel listPortModel;
-    SpeedListModel speedModel;
+    SerialPortWorker *portWorker;
+    portWorker = new SerialPortWorker();
+    SerialPortListModel listPortModel(portWorker);
+
+    SpeedListModel speedModel(portWorker);
 
     qmlRegisterType<SerialPortListModel>("SerialNameList", 1, 0, "SerialNameList_qml");
     qmlRegisterType<SpeedListModel>("SpeedList", 1, 0, "SpeedList_qml");

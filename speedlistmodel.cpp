@@ -2,10 +2,11 @@
 #include <QSerialPort>
 #include "serialportworker.h"
 
-SpeedListModel::SpeedListModel(QObject *parent)
+SpeedListModel::SpeedListModel(QObject *parent, SerialPortWorker* portWorker)
     : QAbstractListModel(parent)
 {
-
+    portWorker = new SerialPortWorker();
+    m_portWorker=portWorker;
     speedlist.append({QSerialPort::Baud1200, "1200 baud"});
     speedlist.append({QSerialPort::Baud2400, "2400 baud"});
     speedlist.append({QSerialPort::Baud4800, "4800 baud"});
@@ -40,6 +41,7 @@ QVariant SpeedListModel::data(const QModelIndex &index, int role) const
 
 void SpeedListModel::setSpeed(int index)
 {
-        SerialPortWorker::setBaud(speedlist.at(index).baud);
+        //setBaud(speedlist.at(index).baud);
+    m_portWorker->setBaud(speedlist.at(index).baud);
 
 }

@@ -49,6 +49,7 @@ QList<QString> SerialPortWorker::getListSerialPortName()
 void SerialPortWorker::setBaud(int baud)
 {
     m_serialPort.setBaudRate(baud);
+    qDebug() << QString("установли BaudRate = ") << baud;
 }
 
 
