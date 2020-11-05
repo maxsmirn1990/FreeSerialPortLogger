@@ -26,15 +26,23 @@ import SerialNameList 1.0
            ComboBox{
                 id:serialBox
                 textRole: "display"
+                editable: false
                 rightPadding: 5
                 anchors.topMargin: 5
                 width: root.width-10
                 height: root.height/3
+
                 model: SerialNameList_qml{
 
                        }
-                displayText: display
+//                model: ListModel {
+//                         id: model
+//                         ListElement { displayText: "Banana" }
+//                         ListElement { displayText: "Apple" }
+//                         ListElement { displayText: "Coconut" }
+//                }
 
+                displayText: display
 
             }
         }

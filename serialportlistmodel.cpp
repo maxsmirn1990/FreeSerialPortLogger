@@ -2,19 +2,16 @@
 #include "serialportlistmodel.h"
 #include <serialportworker.h>
 
-SerialPortListModel::SerialPortListModel(QObject *parent)
-{
-     m_rowCount=0;
-}
 
-SerialPortListModel::SerialPortListModel(SerialPortWorker *portWorker, QObject *parent)
+
+SerialPortListModel::SerialPortListModel(QObject *parent, SerialPortWorker *portWorker)
     : QAbstractListModel(parent)
 {
-   m_rowCount=0;
+
    m_portWorker = portWorker;
    m_list.clear();
    m_list.append(QString("Нажмите кнопку обновить"));
-
+   m_rowCount = m_list.size();
 
 }
 
@@ -31,6 +28,7 @@ int SerialPortListModel::rowCount(const QModelIndex &parent) const
 
 QVariant SerialPortListModel::data(const QModelIndex &index, int role) const
 {
+    role =0;
     if(!index.isValid()||role!=Qt::DisplayRole){
             return QVariant("Не присвоено значений");
     }
@@ -44,6 +42,6 @@ void SerialPortListModel::refresh()
    m_list.clear();
    m_list = m_portWorker->getListSerialPortName();
    m_rowCount = m_list.size();
-   emit dataChanged(createIndex(0,0), createIndex(m_rowCount,0));
+   emit dataChanged(createIndex(0,0), createIndex(m_list.size(),0));
 
 }

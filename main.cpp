@@ -14,8 +14,8 @@ int main(int argc, char *argv[])
     QQmlApplicationEngine engine;
 
 
-    SerialPortWorker *portWorker = new SerialPortWorker();
-    SerialPortListModel listPortModel(portWorker);
+    SerialPortWorker portWorker;
+    SerialPortListModel listPortModel(&portWorker);
 
 
     qmlRegisterType<SerialPortListModel>("SerialNameList", 1, 0, "SerialNameList_qml");
