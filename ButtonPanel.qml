@@ -1,6 +1,7 @@
 import QtQuick.Controls 2.12
 import QtQuick 2.9
 import SerialNameList 1.0
+import SpeedList 1.0
 
 
     Rectangle{
@@ -75,9 +76,18 @@ import SerialNameList 1.0
             //выбор скорости обмена данными
             ComboBox{
                 id:speedCombo
+                textRole: "display"
                 anchors.centerIn: parent.Center
                 width: speedCol.width-5
-                displayText: "Выберите скорость"
+                model: SpeedList_qml{
+
+                       }
+
+                displayText: display
+
+
+
+
             }
         }
         Column{
@@ -92,6 +102,7 @@ import SerialNameList 1.0
                 rightPadding: 5
                 width: parent.width-5
                 text: "Старт"
+                onClicked:  {speedCombo.model.setSpeed(speedCombo.currentIndex)}
 
 
             }

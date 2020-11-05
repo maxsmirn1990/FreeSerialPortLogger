@@ -1,8 +1,10 @@
 #include <QGuiApplication>
 #include <QQmlApplicationEngine>
+#include <QSerialPort>
 #include <serialportlistmodel.h>
 #include <serialportworker.h>
-#include <QtQml>
+#include <speedlistmodel.h>
+
 
 int main(int argc, char *argv[])
 {
@@ -13,12 +15,12 @@ int main(int argc, char *argv[])
 
     QQmlApplicationEngine engine;
 
-
     SerialPortWorker portWorker;
-    SerialPortListModel listPortModel(&portWorker);
-
+    SerialPortListModel listPortModel;
+    SpeedListModel speedModel;
 
     qmlRegisterType<SerialPortListModel>("SerialNameList", 1, 0, "SerialNameList_qml");
+    qmlRegisterType<SpeedListModel>("SpeedList", 1, 0, "SpeedList_qml");
 
 
     const QUrl url(QStringLiteral("qrc:/main.qml"));

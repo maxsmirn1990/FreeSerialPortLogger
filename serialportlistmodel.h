@@ -10,8 +10,8 @@ class SerialPortListModel : public QAbstractListModel
     Q_OBJECT
 
 public:
-//    explicit SerialPortListModel(QObject *parent = nullptr);
-    explicit SerialPortListModel(QObject *parent = nullptr, SerialPortWorker *portWorker = nullptr);
+
+    explicit SerialPortListModel(QObject *parent = nullptr);
 
     // Basic functionality:
     int rowCount(const QModelIndex &parent = QModelIndex()) const override;
@@ -21,7 +21,6 @@ public:
 
 private:
     int m_rowCount;
-    SerialPortWorker* m_portWorker;
     QList<QString> m_list;
 };
 

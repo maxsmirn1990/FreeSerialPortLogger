@@ -10,7 +10,8 @@ CONFIG += c++11
 SOURCES += \
         main.cpp \
         serialportlistmodel.cpp \
-        serialportworker.cpp
+        serialportworker.cpp \
+        speedlistmodel.cpp
 
 RESOURCES += qml.qrc
 
@@ -27,4 +28,5 @@ else: unix:!android: target.path = /opt/$${TARGET}/bin
 
 HEADERS += \
     serialportlistmodel.h \
-    serialportworker.h
+    serialportworker.h \
+    speedlistmodel.h
