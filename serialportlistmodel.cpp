@@ -42,5 +42,10 @@ void SerialPortListModel::refresh()
    m_list = m_portWorker->getListSerialPortName();
    m_rowCount = m_list.size();
    emit dataChanged(createIndex(0,0), createIndex(m_list.size(),0));
+}
 
+void SerialPortListModel::setPort(int index)
+{
+
+        m_portWorker->setPortName(m_list.at(index));
 }

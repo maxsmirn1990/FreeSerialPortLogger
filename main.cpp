@@ -17,6 +17,7 @@ int main(int argc, char *argv[])
 
     SerialPortWorker *portWorker;
     portWorker = new SerialPortWorker();
+
     SerialPortListModel listPortModel(portWorker);
 
     SpeedListModel speedModel(portWorker);

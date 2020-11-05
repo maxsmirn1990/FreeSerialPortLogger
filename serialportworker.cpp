@@ -36,6 +36,14 @@ QList<QString> SerialPortWorker::getListSerialPortName()
     for(int i=0;i<m_listInfo.size();i++){
         m_portNameList.append(m_listInfo.at(i).portName());
     }
+
+    //-------------------------------------------------------
+    //Тест
+
+    m_portNameList.append(QString("Тестовый СОМ порт"));
+
+    //-------------------------------------------------------
+
     //DEBUG
     qDebug() << QString("Список СОМ портов:");
     for(int i=0;i<m_portNameList.size();i++){
@@ -49,7 +57,15 @@ QList<QString> SerialPortWorker::getListSerialPortName()
 void SerialPortWorker::setBaud(int baud)
 {
     m_serialPort.setBaudRate(baud);
-    qDebug() << QString("установли BaudRate = ") << baud;
+    qDebug() << QString("установли BaudRate = ") << m_serialPort.baudRate();
+    qDebug() << QString("установли portName = ") << m_serialPort.portName();
+}
+
+void SerialPortWorker::setPortName(QString name)
+{
+    m_serialPort.setPortName(name);
+    qDebug() << QString("установли BaudRate = ") << m_serialPort.baudRate();
+    qDebug() << QString("установли portName = ") << m_serialPort.portName();
 }
 
 

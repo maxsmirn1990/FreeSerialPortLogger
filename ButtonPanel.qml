@@ -102,7 +102,10 @@ import SpeedList 1.0
                 rightPadding: 5
                 width: parent.width-5
                 text: "Старт"
-                onClicked:  {speedCombo.model.setSpeed(speedCombo.currentIndex)}
+                onClicked:  {
+                    speedCombo.model.setSpeed(speedCombo.currentIndex)
+                    serialBox.model.setPort(serialBox.currentIndex)
+                }
 
 
             }
