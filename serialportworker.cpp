@@ -5,18 +5,10 @@
 
 SerialPortWorker::SerialPortWorker(QObject *parent) : QObject(parent)
 {
-
-    m_listInfo = QSerialPortInfo::availablePorts();
-    m_portNameList.append(m_listInfo.at(0).portName());
-    m_serialPort.setPortName(m_listInfo.at(0).portName());
-    m_serialPort.setBaudRate(QSerialPort::Baud9600);
-
-    //DEBUG
-    qDebug() << QString("Прошла инициализация");
-    qDebug() << QString("Список СОМ портов:");
-    for(int i=0;i<m_portNameList.size();i++){
-    qDebug() << m_portNameList.at(i);
-   }
+   int m_dataBits = QSerialPort::Data8;
+   int m_flowControl = QSerialPort::NoFlowControl;
+   int m_parity = QSerialPort::NoParity;
+   int m_stopBits = QSerialPort::OneStop;
 }
 
 QList<QString> SerialPortWorker::getListSerialPortName()
@@ -37,35 +29,31 @@ QList<QString> SerialPortWorker::getListSerialPortName()
         m_portNameList.append(m_listInfo.at(i).portName());
     }
 
-    //-------------------------------------------------------
-    //Тест
-
-    m_portNameList.append(QString("Тестовый СОМ порт"));
-
-    //-------------------------------------------------------
-
-    //DEBUG
-    qDebug() << QString("Список СОМ портов:");
-    for(int i=0;i<m_portNameList.size();i++){
-    qDebug() << m_portNameList.at(i);
-   }
-
-    return m_portNameList;
-
+   return m_portNameList;
 }
 
 void SerialPortWorker::setBaud(int baud)
 {
-    m_serialPort.setBaudRate(baud);
+    m_baudRate = baud;
     qDebug() << QString("установли BaudRate = ") << m_serialPort.baudRate();
-    qDebug() << QString("установли portName = ") << m_serialPort.portName();
 }
 
 void SerialPortWorker::setPortName(QString name)
 {
-    m_serialPort.setPortName(name);
-    qDebug() << QString("установли BaudRate = ") << m_serialPort.baudRate();
+    m_serialPortName = name;
     qDebug() << QString("установли portName = ") << m_serialPort.portName();
+}
+
+void SerialPortWorker::openPort(QString portName)
+{
+    m_serialPortName = portName;
+    m_serialPort.setPortName(m_serialPortName);
+    m_serialPort.setBaudRate(m_baudRate);
+    m_serialPort.setDataBits(m_dataBits);
+    m_serialPort.setFlowControl(m_flowControl);
+    m_serialPort.setParity(m_parity);
+    m_serialPort.setStopBits(m_stopBits);
+
 }
 
 

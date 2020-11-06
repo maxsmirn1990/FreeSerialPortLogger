@@ -9,14 +9,14 @@ class SpeedListModel : public QAbstractListModel
 {
     Q_OBJECT
 
-    struct baudRate{
+       struct baudRate{
        int baud;
        QString description;
 
     };
 
 public:
-    explicit SpeedListModel(QObject *parent = nullptr, SerialPortWorker* portWorker = nullptr);
+    explicit SpeedListModel(QObject *parent = nullptr);//, SerialPortWorker* portWorker = nullptr);
     int rowCount(const QModelIndex &parent = QModelIndex()) const override;
     QVariant data(const QModelIndex &index, int role = Qt::DisplayRole) const override;
 
@@ -25,7 +25,7 @@ public:
 private:
 
    QList<baudRate> speedlist;
-   SerialPortWorker* m_portWorker;
+
 
 
 

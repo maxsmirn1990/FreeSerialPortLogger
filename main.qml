@@ -45,10 +45,23 @@ Window {
             color: "#434141"
             border.color: "#0f0f0f"
             anchors.fill: view
+
+            ScrollView {
+                id: scrollView
+                anchors.fill: parent
+
+                TextArea {
+                    id: txt
+                    placeholderText: qsTr("Здесь будут данные с СОМ порта")
+                }
+
+            }
+
+
         }
     }
 
-    }
+  }
 
 
 }

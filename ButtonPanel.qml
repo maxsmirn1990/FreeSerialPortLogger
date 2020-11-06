@@ -38,6 +38,9 @@ import SpeedList 1.0
                        }
 
                 displayText: display
+                onCurrentIndexChanged:  {
+                    serialBox.model.setPort(serialBox.currentIndex)
+                }
 
             }
         }
@@ -84,6 +87,9 @@ import SpeedList 1.0
                        }
 
                 displayText: display
+                onCurrentIndexChanged:  {
+                     speedCombo.model.setSpeed(speedCombo.currentIndex)
+                 }
 
 
 
