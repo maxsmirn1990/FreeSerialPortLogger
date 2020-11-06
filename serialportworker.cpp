@@ -5,10 +5,15 @@
 
 SerialPortWorker::SerialPortWorker(QObject *parent) : QObject(parent)
 {
-   int m_dataBits = QSerialPort::Data8;
-   int m_flowControl = QSerialPort::NoFlowControl;
-   int m_parity = QSerialPort::NoParity;
-   int m_stopBits = QSerialPort::OneStop;
+   m_serialData = "Здесь будут данные с СОМ порта";
+   emit serialDataChanged();
+   m_listInfo = QSerialPortInfo::availablePorts();
+
+   m_serialPortName = m_listInfo.at(0).portName();
+   m_dataBits = QSerialPort::Data8;
+   m_flowControl = QSerialPort::NoFlowControl;
+   m_parity = QSerialPort::NoParity;
+   m_stopBits = QSerialPort::OneStop;
 }
 
 QList<QString> SerialPortWorker::getListSerialPortName()
@@ -35,13 +40,13 @@ QList<QString> SerialPortWorker::getListSerialPortName()
 void SerialPortWorker::setBaud(int baud)
 {
     m_baudRate = baud;
-    qDebug() << QString("установли BaudRate = ") << m_serialPort.baudRate();
+    qDebug() << QString("установли BaudRate = ") << m_baudRate;
 }
 
 void SerialPortWorker::setPortName(QString name)
 {
     m_serialPortName = name;
-    qDebug() << QString("установли portName = ") << m_serialPort.portName();
+    qDebug() << QString("установли portName = ") << m_serialPortName;
 }
 
 void SerialPortWorker::openPort(QString portName)
@@ -54,6 +59,14 @@ void SerialPortWorker::openPort(QString portName)
     m_serialPort.setParity(m_parity);
     m_serialPort.setStopBits(m_stopBits);
 
+}
+
+QByteArray SerialPortWorker::serialData() const
+{
+    if(m_serialData.size()==0){
+        return "пусто";
+    }
+    return m_serialData;
 }
 
 

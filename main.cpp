@@ -20,6 +20,7 @@ int main(int argc, char *argv[])
 
     qmlRegisterType<SerialPortListModel>("SerialNameList", 1, 0, "SerialNameList_qml");
     qmlRegisterType<SpeedListModel>("SpeedList", 1, 0, "SpeedList_qml");
+    qmlRegisterType<SerialPortWorker>("SerialWorker", 1, 0, "SerialWorker_qml");
 
 
     const QUrl url(QStringLiteral("qrc:/main.qml"));

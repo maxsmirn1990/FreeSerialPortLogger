@@ -52,7 +52,7 @@ import SpeedList 1.0
             width: root.width/3
             height: root.height/2
             anchors.top: combo.bottom
-            anchors.left: root.left
+           // anchors.left: root.left
             leftPadding: 5
 
             Button{
@@ -104,6 +104,7 @@ import SpeedList 1.0
             anchors.left: speedCol.right
             Button{
                 id:startButton
+                property bool status: false
                 anchors.centerIn: parent.Center
                 rightPadding: 5
                 width: parent.width-5
@@ -111,6 +112,14 @@ import SpeedList 1.0
                 onClicked:  {
                     speedCombo.model.setSpeed(speedCombo.currentIndex)
                     serialBox.model.setPort(serialBox.currentIndex)
+                    if(!status){
+                        startButton.text = "Стоп"
+                        status = !status
+                    } else {
+                        startButton.text = "Старт"
+                        status = !status
+                    }
+
                 }
 
 
