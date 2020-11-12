@@ -9,7 +9,8 @@ SerialPortListModel::SerialPortListModel(QObject *parent)
 {
 
    m_list.clear();
-   m_list.append(QString("Нажмите кнопку обновить"));
+   m_list = portWorker::Instance()->getListSerialPortName();
+   //m_list.append(QString("Нажмите кнопку обновить"));
    m_rowCount = m_list.size();
 
 }
@@ -46,5 +47,17 @@ void SerialPortListModel::refresh()
 void SerialPortListModel::setPort(int index)
 {
 
-        portWorker::Instance()->setPortName(m_list.at(index));
+    portWorker::Instance()->setPortName(m_list.at(index));
 }
+
+void SerialPortListModel::startRead(int index)
+{
+    portWorker::Instance()->openPort(m_list.at(index));
+}
+
+void SerialPortListModel::closePort()
+{
+    portWorker::Instance()->closePort();
+}
+
+

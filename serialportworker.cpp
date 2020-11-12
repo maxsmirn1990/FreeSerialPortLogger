@@ -6,7 +6,7 @@
 SerialPortWorker::SerialPortWorker(QObject *parent) : QObject(parent)
 {
    m_serialData = "Здесь будут данные с СОМ порта";
-   emit serialDataChanged();
+   emit serialDataChanged(m_serialData);
    m_listInfo = QSerialPortInfo::availablePorts();
 
    m_serialPortName = m_listInfo.at(0).portName();
@@ -14,6 +14,13 @@ SerialPortWorker::SerialPortWorker(QObject *parent) : QObject(parent)
    m_flowControl = QSerialPort::NoFlowControl;
    m_parity = QSerialPort::NoParity;
    m_stopBits = QSerialPort::OneStop;
+
+   connect(&m_serialPort, SIGNAL(readyRead()), SLOT(serialRecive()));
+}
+
+SerialPortWorker::~SerialPortWorker()
+{
+    m_serialPort.close();
 }
 
 QList<QString> SerialPortWorker::getListSerialPortName()
@@ -61,6 +68,11 @@ void SerialPortWorker::openPort(QString portName)
     m_serialPort.setFlowControl(m_flowControl);
     m_serialPort.setParity(m_parity);
     m_serialPort.setStopBits(m_stopBits);
+    m_serialPort.open(QIODevice::ReadOnly);
+    if (m_serialPort.isOpen())
+    {
+        qDebug()<<"SerialPort " + m_serialPort.portName() + " is open";
+    }
 
 }
 
@@ -69,12 +81,36 @@ int SerialPortWorker::numberOfPort()
     return m_listInfo.size();
 }
 
+void SerialPortWorker::closePort()
+{
+    m_serialPort.close();
+    m_serialData = "READ IS OVER";
+    emit serialDataChanged(m_serialData);
+    qDebug()<<"SerialPort " + m_serialPort.portName() + " is closed";
+}
+
 QByteArray SerialPortWorker::serialData() const
 {
     if(m_serialData.size()==0){
         return "пусто";
     }
+    qDebug()<<"Jnsldkjrbgn";
     return m_serialData;
+}
+
+void SerialPortWorker::setSerialData(QByteArray serialData)
+{
+    m_serialData=serialData;
+    emit serialDataChanged(m_serialData);
+}
+
+void SerialPortWorker::serialRecive()
+{
+   //m_serialData.clear();
+   setSerialData("READ");
+  // m_serialData.append(m_serialPort.readAll());
+  // emit serialDataChanged(m_serialData);
+
 }
 
 

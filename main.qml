@@ -13,6 +13,7 @@ Window {
     title: qsTr("Логгер СОМ порта")
     SerialWorker_qml{
         id:worker
+
     }
 
     Grid {
@@ -59,7 +60,7 @@ Window {
                     id: txt
                     anchors.fill: parent
                     placeholderTextColor: "#000000"
-                    placeholderText: qsTr(worker.serialData.toString())
+                    placeholderText: worker.serialData//.toString()
                 }
 
             }

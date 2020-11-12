@@ -10,22 +10,29 @@
 class SerialPortWorker : public QObject
 {
     Q_OBJECT
-    Q_PROPERTY(QByteArray serialData READ serialData NOTIFY serialDataChanged);
+
 
 
 public:
+    Q_PROPERTY(QByteArray serialData READ serialData WRITE setSerialData NOTIFY serialDataChanged);
     explicit SerialPortWorker(QObject *parent = nullptr);
+    ~SerialPortWorker();
     QList<QString> getListSerialPortName();
     void setBaud(int baud);
     void setPortName(QString name);
     void openPort(QString portName);
     int numberOfPort();
+    void closePort();
 
 
     QByteArray serialData() const;
+    void setSerialData(QByteArray serialData);
 
 signals:
-    void serialDataChanged();
+    void serialDataChanged(QByteArray serialData);
+
+private slots:
+    void serialRecive();
 
 private:
     QSerialPort::DataBits m_dataBits;

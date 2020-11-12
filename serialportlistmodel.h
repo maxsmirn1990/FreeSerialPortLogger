@@ -17,6 +17,8 @@ public:
     QVariant data(const QModelIndex &index, int role = Qt::DisplayRole) const override;
     Q_INVOKABLE void refresh();
     Q_INVOKABLE void setPort(int index);
+    Q_INVOKABLE void startRead(int index);
+    Q_INVOKABLE void closePort();
 
 private:
 
