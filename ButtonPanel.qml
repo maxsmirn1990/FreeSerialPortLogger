@@ -11,7 +11,7 @@ import SpeedList 1.0
         width: parent.width
 
     Grid{
-        id:grid
+        id:grid_root
 
 
         rows: 1
@@ -24,25 +24,27 @@ import SpeedList 1.0
             topPadding: 5
             leftPadding: 5
 
-           ComboBox{
-                id:serialBox
-                textRole: "display"
-                editable: false
-                rightPadding: 5
-                anchors.topMargin: 5
-                width: root.width-10
-                height: root.height/3
+//           ComboBox{
+//                id:serialBox
+//                textRole: "display"
 
-                model: SerialNameList_qml{
+//                editable: false
+//                rightPadding: 5
+//                anchors.topMargin: 5
+//                width: root.width-10
+//                height: root.height/3
 
-                       }
 
-                displayText: display
-                onCurrentIndexChanged:  {
-                    serialBox.model.setPort(serialBox.currentIndex)
-                }
+//                model: SerialNameList_qml{
 
-            }
+//                       }
+
+//                displayText: display
+//                onCurrentIndexChanged:  {
+//                    serialBox.model.setPort(serialBox.currentIndex)
+//                }
+
+//            }
         }
 
 
@@ -64,6 +66,7 @@ import SpeedList 1.0
                 text: "Обновить"
                onClicked: {
                    serialBox.model.refresh()
+
                }
 
             }
@@ -77,18 +80,31 @@ import SpeedList 1.0
             anchors.left: refCol.right
 
             //выбор скорости обмена данными
+//            ComboBox{
+//                id:speedCombo
+//                textRole: "display"
+//                anchors.centerIn: parent.Center
+//                width: speedCol.width-5
+//                model: SpeedList_qml{
+
+//                       }
+
+//                displayText: display
+//                onCurrentIndexChanged:  {
+//                     speedCombo.model.setSpeed(speedCombo.currentIndex)
+//                 }
             ComboBox{
-                id:speedCombo
+                id:serialBox
                 textRole: "display"
                 anchors.centerIn: parent.Center
                 width: speedCol.width-5
-                model: SpeedList_qml{
+                model: SerialNameList_qml{
 
                        }
 
                 displayText: display
                 onCurrentIndexChanged:  {
-                     speedCombo.model.setSpeed(speedCombo.currentIndex)
+                     serialBox.model.setPort(serialBox.currentIndex)
                  }
 
 

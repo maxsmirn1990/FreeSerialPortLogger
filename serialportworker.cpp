@@ -21,6 +21,9 @@ QList<QString> SerialPortWorker::getListSerialPortName()
     if (!m_listInfo.isEmpty()){
         m_listInfo.clear();
     }
+    if (!m_portNameList.isEmpty()){
+        m_portNameList.clear();
+    }
 
     m_listInfo = QSerialPortInfo::availablePorts();
 
@@ -59,6 +62,11 @@ void SerialPortWorker::openPort(QString portName)
     m_serialPort.setParity(m_parity);
     m_serialPort.setStopBits(m_stopBits);
 
+}
+
+int SerialPortWorker::numberOfPort()
+{
+    return m_listInfo.size();
 }
 
 QByteArray SerialPortWorker::serialData() const

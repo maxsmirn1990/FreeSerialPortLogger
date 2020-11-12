@@ -16,7 +16,7 @@ class SpeedListModel : public QAbstractListModel
     };
 
 public:
-    explicit SpeedListModel(QObject *parent = nullptr);//, SerialPortWorker* portWorker = nullptr);
+    explicit SpeedListModel(QObject *parent = nullptr);
     int rowCount(const QModelIndex &parent = QModelIndex()) const override;
     QVariant data(const QModelIndex &index, int role = Qt::DisplayRole) const override;
 

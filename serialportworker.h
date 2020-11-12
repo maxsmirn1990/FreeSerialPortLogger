@@ -19,6 +19,7 @@ public:
     void setBaud(int baud);
     void setPortName(QString name);
     void openPort(QString portName);
+    int numberOfPort();
 
 
     QByteArray serialData() const;
