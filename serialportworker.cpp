@@ -4,7 +4,7 @@
 #include <reader.h>
 #include <QDebug>
 
-SerialPortWorker::SerialPortWorker(QObject *parent) : QObject(parent)
+SerialPortWorker::SerialPortWorker(QObject *parent) : QThread(parent = nullptr)
 {
    connect(&m_serialPort, SIGNAL(readyRead()),
            this, SLOT(serialRecive()));
@@ -73,6 +73,7 @@ void SerialPortWorker::openPort(QString portName)
     {
         qDebug()<<"SerialPort " + m_serialPort.portName() + " is open";
     }
+    //run();
 
 }
 
@@ -102,7 +103,9 @@ QByteArray SerialPortWorker::serialData() const
 void SerialPortWorker::setSerialData(QByteArray serialData)
 {
     m_serialData=serialData;
-    emit serialDataChanged(m_serialData);
+    qDebug()<<this->currentThreadId();
+    qDebug()<<m_serialData.toHex();
+   // emit serialDataChanged(m_serialData);
 }
 
 void SerialPortWorker::serialRecive()
@@ -112,6 +115,12 @@ void SerialPortWorker::serialRecive()
   // m_serialData.append(m_serialPort.readAll());
   // emit serialDataChanged(m_serialData);
 
+}
+
+void SerialPortWorker::run()
+{
+    qDebug()<<"Run work";
+    this->exec();
 }
 
 

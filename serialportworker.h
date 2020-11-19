@@ -2,12 +2,13 @@
 #define SERIALPORTWORKER_H
 
 #include <QObject>
+#include <QThread>
 #include <QSerialPort>
 #include <QSerialPortInfo>
 #include "Singleton.h"
 
 
-class SerialPortWorker : public QObject
+class SerialPortWorker : public QThread
 {
     Q_OBJECT
 
@@ -47,6 +48,10 @@ private:
     QList<QString> m_portNameList;
     QByteArray m_serialData;
 
+
+    // QThread interface
+protected:
+    virtual void run() override;
 };
 
 typedef  Singleton<SerialPortWorker> portWorker;

@@ -53,6 +53,7 @@ void SerialPortListModel::setPort(int index)
 void SerialPortListModel::startRead(int index)
 {
     portWorker::Instance()->openPort(m_list.at(index));
+
 }
 
 void SerialPortListModel::closePort()
