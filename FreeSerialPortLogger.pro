@@ -9,6 +9,7 @@ CONFIG += c++11
 
 SOURCES += \
         main.cpp \
+        reader.cpp \
         serialportlistmodel.cpp \
         serialportworker.cpp \
         speedlistmodel.cpp
@@ -28,6 +29,7 @@ else: unix:!android: target.path = /opt/$${TARGET}/bin
 
 HEADERS += \
     Singleton.h \
+    reader.h \
     serialportlistmodel.h \
     serialportworker.h \
     speedlistmodel.h

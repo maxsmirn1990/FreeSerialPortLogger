@@ -1,14 +1,14 @@
 #include <QSerialPort>
 #include <QSerialPortInfo>
 #include "serialportworker.h"
+#include <reader.h>
 #include <QDebug>
 
 SerialPortWorker::SerialPortWorker(QObject *parent) : QObject(parent)
 {
-   m_serialData = "Здесь будут данные с СОМ порта";
-   emit serialDataChanged(m_serialData);
+   connect(&m_serialPort, SIGNAL(readyRead()),
+           this, SLOT(serialRecive()));
    m_listInfo = QSerialPortInfo::availablePorts();
-
    m_serialPortName = m_listInfo.at(0).portName();
    m_dataBits = QSerialPort::Data8;
    m_flowControl = QSerialPort::NoFlowControl;
@@ -84,6 +84,7 @@ int SerialPortWorker::numberOfPort()
 void SerialPortWorker::closePort()
 {
     m_serialPort.close();
+    m_serialData.clear();
     m_serialData = "READ IS OVER";
     emit serialDataChanged(m_serialData);
     qDebug()<<"SerialPort " + m_serialPort.portName() + " is closed";
@@ -106,8 +107,8 @@ void SerialPortWorker::setSerialData(QByteArray serialData)
 
 void SerialPortWorker::serialRecive()
 {
-   //m_serialData.clear();
-   setSerialData("READ");
+
+   setSerialData(m_serialPort.readLine(100));
   // m_serialData.append(m_serialPort.readAll());
   // emit serialDataChanged(m_serialData);
 

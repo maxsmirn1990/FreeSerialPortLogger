@@ -14,7 +14,7 @@ class SerialPortWorker : public QObject
 
 
 public:
-    Q_PROPERTY(QByteArray serialData READ serialData WRITE setSerialData NOTIFY serialDataChanged);
+
     explicit SerialPortWorker(QObject *parent = nullptr);
     ~SerialPortWorker();
     QList<QString> getListSerialPortName();
@@ -45,8 +45,6 @@ private:
     QSerialPort m_serialPort;
     QList<QSerialPortInfo> m_listInfo;
     QList<QString> m_portNameList;
-
-    //Переменные, которые пробрасываются в QML
     QByteArray m_serialData;
 
 };

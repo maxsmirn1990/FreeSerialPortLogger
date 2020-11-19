@@ -2,7 +2,7 @@ import QtQuick 2.9
 import QtQuick.Window 2.2
 import QtQuick.Controls 2.12
 import SerialNameList 1.0
-import SerialWorker 1.0
+import Reader 1.0
 
 
 Window {
@@ -11,10 +11,14 @@ Window {
     height: 480
     visible: true
     title: qsTr("Логгер СОМ порта")
-    SerialWorker_qml{
+    Reader_qml{
         id:worker
+       onM_readDataChanged:  {
+          //  console.log(m_readData)
+           txt.placeholderText = m_readData.toString();
+        }
 
-    }
+        }
 
     Grid {
         id: rootGrid
@@ -35,9 +39,7 @@ Window {
                 id:panel
                 height: parent.height
                 width: parent.width
-               }
-
-
+              }
       }
 
 
@@ -49,7 +51,7 @@ Window {
         Rectangle{
             color: "#434141"
             border.color: "#0f0f0f"
-            anchors.fill: parent
+            anchors.fill: view
 
             ScrollView {
                 id: scrollView
@@ -60,7 +62,8 @@ Window {
                     id: txt
                     anchors.fill: parent
                     placeholderTextColor: "#000000"
-                    placeholderText: worker.serialData//.toString()
+                    placeholderText: "Здесь будут данные с СОМ порта"
+
                 }
 
             }
