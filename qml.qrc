@@ -2,5 +2,6 @@
     <qresource prefix="/">
         <file>main.qml</file>
         <file>ButtonPanel.qml</file>
+        <file>Byte_View.qml</file>
     </qresource>
 </RCC>

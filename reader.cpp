@@ -24,6 +24,5 @@ void Reader::setReadData(QByteArray readData)
     m_readData.append(readData);
     m_readData.append("\n\r");
     m_readData.toHex(' ');
-
     emit readDataChanged();
 }
