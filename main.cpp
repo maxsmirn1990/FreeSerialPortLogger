@@ -6,6 +6,7 @@
 #include <serialportworker.h>
 #include <speedlistmodel.h>
 #include <reader.h>
+#include <bytegridviewmodel.h>
 
 
 
@@ -19,11 +20,12 @@ int main(int argc, char *argv[])
     qDebug()<<QThread::currentThreadId();
     portWorker::Instance()->moveToThread(portWorker::Instance());
     portWorker::Instance()->start();
+    ByteGridViewModel();
 
     qmlRegisterType<Reader>("Reader", 1, 0, "Reader_qml");
     qmlRegisterType<SerialPortListModel>("SerialNameList", 1, 0, "SerialNameList_qml");
     qmlRegisterType<SpeedListModel>("SpeedList", 1, 0, "SpeedList_qml");
-
+    qmlRegisterType<ByteGridViewModel>("ByteGridViewModel", 1, 0, "ByteGridViewModel_qml");
 
 
     const QUrl url(QStringLiteral("qrc:/main.qml"));

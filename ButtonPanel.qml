@@ -12,8 +12,6 @@ import SpeedList 1.0
 
     Grid{
         id:grid_root
-
-
         rows: 1
         columns: 3
 
@@ -30,7 +28,6 @@ import SpeedList 1.0
 
                 editable: false
                 rightPadding: 5
-                anchors.topMargin: 5
                 width: root.width-10
                 height: root.height/3
 
@@ -54,7 +51,7 @@ import SpeedList 1.0
             width: root.width/3
             height: root.height/2
             anchors.top: combo.bottom
-           // anchors.left: root.left
+            anchors.left: root.left
             leftPadding: 5
 
             Button{

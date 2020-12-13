@@ -4,25 +4,23 @@
 Reader::Reader(QObject *parent) : QObject(parent)
 {
     connect(portWorker::Instance(),
-            SIGNAL(serialDataChanged(QByteArray)),
+            SIGNAL(serialDataChanged(QString)),
             this,
-            SLOT (setReadData(QByteArray)));
+            SLOT (setReadData(QString)));
 }
 
-QByteArray Reader::readData()
+QString Reader::readData()
 {
-    return m_readData;
+   return m_readData;
 }
 
 
 
-void Reader::setReadData(QByteArray readData)
+void Reader::setReadData(QString readData)
 {
-//    if (m_readData == readData)
-//        return;
-
+    m_readData.clear();
     m_readData.append(readData);
-    m_readData.append("\n\r");
-    m_readData.toHex(' ');
+    m_readData = m_readData.toUpper();
+    m_readData.insert(0, "0x");
     emit readDataChanged();
 }

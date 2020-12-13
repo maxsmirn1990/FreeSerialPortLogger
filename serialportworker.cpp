@@ -1,5 +1,6 @@
 #include <QSerialPort>
 #include <QSerialPortInfo>
+#include <QByteArray>
 #include "serialportworker.h"
 #include <reader.h>
 #include <QDebug>
@@ -91,7 +92,7 @@ void SerialPortWorker::closePort()
     qDebug()<<"SerialPort " + m_serialPort.portName() + " is closed";
 }
 
-QByteArray SerialPortWorker::serialData() const
+QString SerialPortWorker::serialData() const
 {
     if(m_serialData.size()==0){
         return "пусто";
@@ -100,18 +101,21 @@ QByteArray SerialPortWorker::serialData() const
     return m_serialData;
 }
 
-void SerialPortWorker::setSerialData(QByteArray serialData)
+void SerialPortWorker::setSerialData(QString serialData)
 {
     m_serialData=serialData;
     qDebug()<<this->currentThreadId();
-    qDebug()<<m_serialData.toHex();
-   // emit serialDataChanged(m_serialData);
+    qDebug()<<m_serialData;
+    emit serialDataChanged(m_serialData);
 }
 
 void SerialPortWorker::serialRecive()
 {
-
-   setSerialData(m_serialPort.readLine(100));
+   QString st;
+   QByteArray ba;
+   ba = m_serialPort.read(1);
+   st = ba.toHex();
+   setSerialData(st);
   // m_serialData.append(m_serialPort.readAll());
   // emit serialDataChanged(m_serialData);
 

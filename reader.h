@@ -6,20 +6,20 @@
 class Reader : public QObject
 {
     Q_OBJECT
-    Q_PROPERTY(QByteArray m_readData READ readData WRITE setReadData NOTIFY readDataChanged);
+    Q_PROPERTY(QString m_readData READ readData WRITE setReadData NOTIFY readDataChanged);
 public:
     explicit Reader(QObject *parent = nullptr);
-    QByteArray readData();
+    QString readData();
 
 
 public slots:
-    void setReadData(QByteArray readData);
+    void setReadData(QString readData);
 
 signals:
     void readDataChanged();
 
 private:
-    QByteArray m_readData;
+    QString m_readData="";
 
 };
 

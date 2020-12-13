@@ -26,11 +26,11 @@ public:
     void closePort();
 
 
-    QByteArray serialData() const;
-    void setSerialData(QByteArray serialData);
+    QString serialData() const;
+    void setSerialData(QString serialData);
 
 signals:
-    void serialDataChanged(QByteArray serialData);
+    void serialDataChanged(QString serialData);
 
 private slots:
     void serialRecive();
@@ -42,11 +42,11 @@ private:
     QSerialPort::StopBits m_stopBits;
     int m_baudRate;
 
-    QString m_serialPortName;
+    QString m_serialPortName="";
     QSerialPort m_serialPort;
     QList<QSerialPortInfo> m_listInfo;
     QList<QString> m_portNameList;
-    QByteArray m_serialData;
+    QString m_serialData="";
 
 
     // QThread interface

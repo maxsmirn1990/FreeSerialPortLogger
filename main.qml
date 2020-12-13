@@ -3,6 +3,7 @@ import QtQuick.Window 2.2
 import QtQuick.Controls 2.12
 import SerialNameList 1.0
 import Reader 1.0
+import ByteGridViewModel 1.0
 
 
 Window {
@@ -13,9 +14,11 @@ Window {
     title: qsTr("Логгер СОМ порта")
     Reader_qml{
         id:worker
+        property int i: 0
        onM_readDataChanged:  {
-          //  console.log(m_readData)
-           txt.placeholderText = m_readData.toString();
+           console.log("Пришела строка: "+m_readData)
+   //        li.append(Byte_View)
+
         }
 
         }
@@ -61,56 +64,18 @@ Window {
                 ScrollBar.vertical.policy: ScrollBar.AlwaysOn
                 ScrollBar.vertical.interactive: true
 
-                ListView{
-                    id:list_message
-                    anchors.fill: parent
-                    leftMargin: 5
-                    rightMargin: 5
-                    topMargin: 5
-                    //columnSpacing: 3
-                    //rowSpacing: 5
-                    delegate: Byte_View
-                    model: 10
-                }
-                ListModel{
-                    id:modelViewByte
-                    ListElement{
-                        txt: qsTr("0xFF")
-                    }
-                    ListElement{
-                        txt: qsTr("0xFF")
-                    }
-                    ListElement{
-                        txt: qsTr("0xFF")
-                    }
-                    ListElement{
-                        txt: qsTr("0xFF")
-                    }
-                    ListElement{
-                        txt: qsTr("0xFF")
-                    }
-                    ListElement{
-                        txt: qsTr("0xFF")
-                    }
-                    ListElement{
-                        txt: qsTr("0xFF")
-                    }
-                    ListElement{
-                        txt: qsTr("0xFF")
-                    }
-                    ListElement{
-                        txt: qsTr("0xFF")
-                    }
-                }
+            GridView{
+                id:gridV
+                flow: GridView.FlowLeftToRight
+                leftMargin: 30
+                topMargin: 10
+                cellHeight: 30
+                cellWidth:60
+                delegate:Byte_View{}
+                model: ByteGridViewModel_qml{}
+            }
 
 
-
-//                TextArea {
-//                    id: txt
-//                    anchors.fill: parent
-//                    placeholderTextColor: "#000000"
-//                    placeholderText: "Здесь будут данные с СОМ порта"
-//                }
 
             }
 

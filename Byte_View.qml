@@ -1,8 +1,13 @@
 import QtQuick 2.0
+import Reader 1.0
+import ByteGridViewModel 1.0
 
 Item {
     id:root
-    property alias txt:textByte.text
+     Reader_qml{
+        id:worker
+     }
+
     Item {
         id: name
         width: 80
@@ -15,7 +20,7 @@ Item {
             anchors.rightMargin: 40
             enabled: false
         radius: 5
-//--------GRADIENT-------------------
+
         gradient: Gradient {
             GradientStop {
                 position: 0
@@ -27,17 +32,16 @@ Item {
                 color: "#96e6a1"
             }
         }
-//--------------------------------------------
         Text {
             id: textByte
-
-            font.bold: false
+            font.bold: true
             font.pointSize: 9
-            color: "#434141"
-            text: txt
-            anchors.verticalCenter: parent.verticalCenter
+            color: "#1a1919"
+            text: display;
+            anchors.bottom: parent.verticalCenter
+            anchors.bottomMargin: -5
             anchors.horizontalCenter: parent.horizontalCenter
-            anchors.top: parent.top
+            font.family: "Tahoma"
 
         }
 
