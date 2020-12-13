@@ -2,12 +2,12 @@
 
 BufferWorker::BufferWorker(QObject *parent) : QObject(parent)
 {
-
+    m_buf.open(QBuffer::ReadWrite);
 }
 
-QBuffer BufferWorker::openBuffer()
+BufferWorker::~BufferWorker()
 {
-    m_buf.open(QBuffer::ReadWrite);
+    m_buf.close();
 }
 
 

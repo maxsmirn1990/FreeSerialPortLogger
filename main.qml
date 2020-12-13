@@ -51,14 +51,39 @@ Window {
         width: parent.width
         height: parent.height*4/5
 
+
         Rectangle{
+            id: rectangle
             color: "#434141"
             border.color: "#0f0f0f"
             anchors.fill: view
 
+            ProgressBar{
+                id:progres
+                width: 0.9*view.width
+
+                height:10
+                visible: true
+                hoverEnabled: false
+                anchors.horizontalCenter: parent.horizontalCenter
+                from:0
+                to:1024
+                value: 512
+
+            }
+            BusyIndicator{
+                id:indikatorBusy
+                width: view.width
+                height: view.height-progres.width
+                anchors.top: progres.bottom
+                anchors.topMargin: 5
+                visible: true
+            }
+
             ScrollView {
                 id: scrollView
                 anchors.fill: parent
+                visible: false
                 clip: true
                 ScrollBar.horizontal.policy: ScrollBar.AlwaysOff
                 ScrollBar.vertical.policy: ScrollBar.AlwaysOn
@@ -78,6 +103,7 @@ Window {
 
 
             }
+
 
 
         }
