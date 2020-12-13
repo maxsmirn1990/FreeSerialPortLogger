@@ -2,6 +2,7 @@
 #define BUFFERWORKER_H
 
 #include <QObject>
+#include <QBuffer>
 
 class BufferWorker : public QObject
 {
@@ -9,8 +10,13 @@ class BufferWorker : public QObject
 public:
     explicit BufferWorker(QObject *parent = nullptr);
 
-signals:
 
+signals:
+private:
+    QBuffer openBuffer();
+
+
+    QBuffer m_buf;
 };
 
 #endif // BUFFERWORKER_H
