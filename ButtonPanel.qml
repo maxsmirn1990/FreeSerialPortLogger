@@ -114,10 +114,12 @@ import SpeedList 1.0
                     serialBox.model.setPort(serialBox.currentIndex)
                     if(!status){
                         startButton.text = "Стоп"
+                        serialBox.enabled=false
                         status = !status
                         serialBox.model.startRead(serialBox.currentIndex)
                     } else {
                         startButton.text = "Старт"
+                        serialBox.enabled =true
                         status = !status
                         serialBox.model.closePort()
                     }

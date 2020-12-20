@@ -1,13 +1,17 @@
 #include "bytegridviewmodel.h"
+#include <serialportworker.h>
 #include <QDebug>
 
 ByteGridViewModel::ByteGridViewModel(QObject *parent)
     : QAbstractListModel(parent)
 {
-    for(int i=0;i<100;i++){
-    m_testByteArr.insert(i, 0x00+i);
-    }
-    emit dataChanged(createIndex(0,0), createIndex(100,0));
+
+    connect(portWorker::Instance(),
+            SIGNAL(serialDataChanged(QByteArray)),
+            this,
+            SLOT (addReadingByte(QByteArray)));
+
+
     qDebug()<<"Construktor316354164 otrabotal";
 }
 
@@ -19,7 +23,7 @@ int ByteGridViewModel::rowCount(const QModelIndex &parent) const
         return 0;
     }
 
-    return m_testByteArr.size(); //test
+    return m_ByteArr.size(); //test
 }
 
 QVariant ByteGridViewModel::data(const QModelIndex &index,
@@ -36,10 +40,32 @@ QVariant ByteGridViewModel::data(const QModelIndex &index,
     const int rowIndex(index.row());
     QString s;
     QByteArray bt;
-    bt.append(m_testByteArr.at(rowIndex));
+    bt.append(m_ByteArr.at(rowIndex));
     s = bt.toHex();
     s.insert(0,"0x");
 
     return QVariant::fromValue<QString>(s);
 
+}
+
+void ByteGridViewModel::addByte()
+{
+    QByteArray bt;
+    bt.append(0xFF);
+    int a = m_ByteArr.size();
+    beginInsertRows(QModelIndex(),a,a);
+    m_ByteArr.append(bt);
+    endInsertRows();
+
+}
+
+void ByteGridViewModel::addReadingByte(const QByteArray bytes){
+
+    qDebug()<<"Catch signal whit array: "<<bytes.toHex();//"Сигнал о готовности к выводу пойман";
+
+    int a = m_ByteArr.size();
+    int b = bytes.size();
+    beginInsertRows(QModelIndex(),a,a+b);
+    m_ByteArr.append(bytes);
+    endInsertRows();
 }

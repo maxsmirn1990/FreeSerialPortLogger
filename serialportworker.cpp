@@ -89,37 +89,22 @@ void SerialPortWorker::closePort()
     m_serialData.clear();
     m_serialData = "READ IS OVER";
     emit serialDataChanged(m_serialData);
+    m_serialData.clear();
     qDebug()<<"SerialPort " + m_serialPort.portName() + " is closed";
-}
-
-QString SerialPortWorker::serialData() const
-{
-    if(m_serialData.size()==0){
-        return "пусто";
-    }
-    qDebug()<<"Jnsldkjrbgn";
-    return m_serialData;
-}
-
-void SerialPortWorker::setSerialData(QString serialData)
-{
-    m_serialData=serialData;
-    qDebug()<<this->currentThreadId();
-    qDebug()<<m_serialData;
-    emit serialDataChanged(m_serialData);
 }
 
 void SerialPortWorker::serialRecive()
 {
-   QString st;
-   QByteArray ba;
-   ba = m_serialPort.read(1);
-   st = ba.toHex();
-   setSerialData(st);
-  // m_serialData.append(m_serialPort.readAll());
-  // emit serialDataChanged(m_serialData);
 
-}
+   m_serialData.clear();
+
+   m_serialData = m_serialPort.readAll();
+
+      qDebug()<<"QByteArray read:  "<<m_serialData.toHex();
+      emit serialDataChanged(m_serialData);
+      qDebug()<<"emit signal with byte array";
+    }
+
 
 void SerialPortWorker::run()
 {

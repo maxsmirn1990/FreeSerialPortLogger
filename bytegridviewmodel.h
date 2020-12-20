@@ -14,9 +14,12 @@ public:
     int rowCount(const QModelIndex &parent = QModelIndex()) const override;
 
     QVariant data(const QModelIndex &index, int role = Qt::DisplayRole) const override;
+    Q_INVOKABLE void addByte();
+private slots:
+    void addReadingByte(const QByteArray bytes);
 
 private:
-    QByteArray m_testByteArr;
+    QByteArray m_ByteArr;
     QString m_ByteString="NULL";
 
 };

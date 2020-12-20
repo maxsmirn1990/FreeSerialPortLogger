@@ -13,7 +13,6 @@ class SerialPortWorker : public QThread
     Q_OBJECT
 
 
-
 public:
 
     explicit SerialPortWorker(QObject *parent = nullptr);
@@ -26,11 +25,11 @@ public:
     void closePort();
 
 
-    QString serialData() const;
-    void setSerialData(QString serialData);
+
+    void setSerialData(QByteArray m_serialData);
 
 signals:
-    void serialDataChanged(QString serialData);
+    void serialDataChanged(QByteArray m_serialData);
 
 private slots:
     void serialRecive();
@@ -46,7 +45,8 @@ private:
     QSerialPort m_serialPort;
     QList<QSerialPortInfo> m_listInfo;
     QList<QString> m_portNameList;
-    QString m_serialData="";
+
+    QByteArray m_serialData;
 
 
     // QThread interface

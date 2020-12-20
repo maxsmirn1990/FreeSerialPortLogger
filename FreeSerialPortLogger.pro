@@ -6,10 +6,8 @@ CONFIG += c++11
 #DEFINES += QT_DISABLE_DEPRECATED_BEFORE=0x060000    # disables all the APIs deprecated before Qt 6.0.0
 
 SOURCES += \
-        bufferworker.cpp \
         bytegridviewmodel.cpp \
         main.cpp \
-        reader.cpp \
         serialportlistmodel.cpp \
         serialportworker.cpp \
         speedlistmodel.cpp
@@ -29,9 +27,7 @@ else: unix:!android: target.path = /opt/$${TARGET}/bin
 
 HEADERS += \
     Singleton.h \
-    bufferworker.h \
     bytegridviewmodel.h \
-    reader.h \
     serialportlistmodel.h \
     serialportworker.h \
     speedlistmodel.h
