@@ -14,13 +14,14 @@ public:
     int rowCount(const QModelIndex &parent = QModelIndex()) const override;
 
     QVariant data(const QModelIndex &index, int role = Qt::DisplayRole) const override;
-    Q_INVOKABLE void addByte();
+    Q_INVOKABLE void saveModelData(const QString url);
+
+
 private slots:
     void addReadingByte(const QByteArray bytes);
 
 private:
     QByteArray m_ByteArr;
-    QString m_ByteString="NULL";
 
 };
 

@@ -1,13 +1,8 @@
 import QtQuick 2.0
-import Reader 1.0
 import ByteGridViewModel 1.0
 
 Item {
     id:root
-     Reader_qml{
-        id:worker
-     }
-
     Item {
         id: name
         width: 80

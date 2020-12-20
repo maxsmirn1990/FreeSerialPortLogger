@@ -2,7 +2,6 @@
 #include <QSerialPortInfo>
 #include <QByteArray>
 #include "serialportworker.h"
-#include <reader.h>
 #include <QDebug>
 
 SerialPortWorker::SerialPortWorker(QObject *parent) : QThread(parent = nullptr)
@@ -87,8 +86,7 @@ void SerialPortWorker::closePort()
 {
     m_serialPort.close();
     m_serialData.clear();
-    m_serialData = "READ IS OVER";
-    emit serialDataChanged(m_serialData);
+    qDebug()<<"READ IS OVER";
     m_serialData.clear();
     qDebug()<<"SerialPort " + m_serialPort.portName() + " is closed";
 }

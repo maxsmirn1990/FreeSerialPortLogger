@@ -1,5 +1,6 @@
 #include "bytegridviewmodel.h"
 #include <serialportworker.h>
+#include <QFile>
 #include <QDebug>
 
 ByteGridViewModel::ByteGridViewModel(QObject *parent)
@@ -48,14 +49,24 @@ QVariant ByteGridViewModel::data(const QModelIndex &index,
 
 }
 
-void ByteGridViewModel::addByte()
+void ByteGridViewModel::saveModelData(const QString url)
 {
-    QByteArray bt;
-    bt.append(0xFF);
-    int a = m_ByteArr.size();
-    beginInsertRows(QModelIndex(),a,a);
-    m_ByteArr.append(bt);
-    endInsertRows();
+    QString winUrl;
+    for(int i=8;i<url.length();i++){
+        if(url.at(i)=="/"){
+            winUrl.append("\\");
+            winUrl.append("\\");
+        }else{
+            winUrl.append(url.at(i));
+        }
+    }
+    QFile file(winUrl);
+    if (file.open(QIODevice::OpenModeFlag::Append)){
+        file.write(m_ByteArr);
+        file.close();
+    }else{
+        qDebug()<<"Dont open file "<<winUrl;
+    }
 
 }
 
@@ -65,7 +76,7 @@ void ByteGridViewModel::addReadingByte(const QByteArray bytes){
 
     int a = m_ByteArr.size();
     int b = bytes.size();
-    beginInsertRows(QModelIndex(),a,a+b);
+    beginInsertRows(QModelIndex(),a,(a+b)-1);
     m_ByteArr.append(bytes);
     endInsertRows();
 }
